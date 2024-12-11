@@ -34,12 +34,17 @@ function printArrayElements(array: any[]): void {
   }
 }
 
+printArrayElements([1, 2, 3]);
+printArrayElements(["a", "b", "c"]);
+
 // #59g0IsA
 // - створити функцію яка створює параграф з текстом та виводить його через document.write. Текст задати через аргумент
 
 function createParagraph(text: string): void {
   document.write(`<p>${text}</p>`);
 }
+
+createParagraph("Hello");
 
 // #hOL6126
 // - створити функцію яка створює ul з трьома елементами li та виводить його через document.write.
@@ -48,6 +53,8 @@ function createParagraph(text: string): void {
 function renderList(text: string): void {
   document.write(`<ul><li>${text}</li><li>${text}</li><li>${text}</li></ul>`);
 }
+
+renderList("List element");
 
 // #0Kxco1edSN
 // - створити функцію яка створює ul з  елементами li.
@@ -62,6 +69,8 @@ function createListWithItems(text: string, li: number): void {
   document.write(`</ul>`);
 }
 
+createListWithItems("item", 6);
+
 // #gEFoxMMO
 // - створити функцію яка приймає масив примітивних елементів (числа,стрінги,булеві),
 // та будує для них список (ul li) та виводить його через document.write
@@ -74,23 +83,33 @@ function createListFromArray(arrayList: any[]) {
   document.write(`</ul>`);
 }
 
+createListFromArray([1, "hello", true, "world", 42]);
+
 // #bovDJDTIjt
 // - створити функцію яка приймає масив об'єктів з наступними полями id,name,age ,
 // та виводить їх в документ. Для кожного об'єкту окремий блок.
 
-interface User {
+interface BasicUser {
   id: number;
   name: string;
   age: number;
 }
 
-function displayUserInfo(objectArray: User[]): void {
+function displayUserInfo(objectArray: BasicUser[]): void {
   for (const objectArrayElement of objectArray) {
     document.write(`<div>${objectArrayElement.id}</div>`);
     document.write(`<div>${objectArrayElement.name}</div>`);
     document.write(`<div>${objectArrayElement.age}</div>`);
   }
 }
+
+const basicUsers: BasicUser[] = [
+  { id: 1, name: "John", age: 25 },
+  { id: 2, name: "Jane", age: 30 },
+  { id: 3, name: "Doe", age: 22 },
+];
+
+displayUserInfo(basicUsers);
 
 // #pghbnSB
 // - створити функцію яка повертає найменьше число з масиву
@@ -105,6 +124,8 @@ function findMin(array: number[]): number {
   return minNumber;
 }
 
+console.log(findMin([5, 3, 8, 1, 9]));
+
 // #EKRNVPM
 // - створити функцію sum(arr) яка приймає масив чисел, сумує значення
 // елементів масиву та повертає його. Приклад sum([1,2,10]) //->13
@@ -117,10 +138,12 @@ function sum(arr: number[]): number {
   return result;
 }
 
+console.log(sum([5, 3, 8, 1, 9]));
+
 // #kpsbSQCt2Lf
 // - створити функцію swap(arr,index1,index2). Функція міняє місцями заняення у відповідних індексах
 
-function swap(arr, index1, index2) {
+function swap(arr: number[], index1: number, index2: number): number[] {
   let a = arr[index1];
   arr[index1] = arr[index2];
   arr[index2] = a;
@@ -128,11 +151,17 @@ function swap(arr, index1, index2) {
   return arr;
 }
 
+console.log(swap([5, 3, 8, 1, 9], 3, 0));
+
 // #mkGDenYnNjn
 // - Написати функцію обміну валюти exchange(sumUAH,currencyValues,exchangeCurrency)
 // Приклад exchange(10000,[{currency:'USD',value:25},{currency:'EUR',value:42}],'USD') // => 400
 
-function exchange(sumUAH, currencyValues, exchangeCurrency) {
+function exchange(
+  sumUAH: number,
+  currencyValues: { currency: string; value: number }[],
+  exchangeCurrency: string,
+): number | string {
   for (const element of currencyValues) {
     if (element.currency === exchangeCurrency) {
       return sumUAH / element.value;
@@ -140,3 +169,14 @@ function exchange(sumUAH, currencyValues, exchangeCurrency) {
   }
   return `Немає валюти у списку`;
 }
+
+console.log(
+  exchange(
+    10000,
+    [
+      { currency: "USD", value: 25 },
+      { currency: "EUR", value: 42 },
+    ],
+    "USD",
+  ),
+);
